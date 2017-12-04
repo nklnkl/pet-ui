@@ -6,4 +6,7 @@
 class SignupComponent {
   private email: string;
   private password: string;
+  private name: string;
+  private birthday: number;
+  private address: string;
 }
