@@ -1,5 +1,5 @@
 <form>
-  <input type="email" name="email" >{{ email }}</br>
-  <input type="password" name="password">{{ password }}</br>
-  <input type="submit" value="Submit"></br>
+  <input type="email" name="email" [(ngModel)]="email">
+  <input type="password" name="password" [(ngModel)]="password">
+  <button type="submit" (click)="login()">Login</button>
 </form>
