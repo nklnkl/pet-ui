@@ -1,0 +1,9 @@
+<form>
+  Name: <input type="text" name="name" [(ngModel)]="name">
+  E=mail: <input type="email" name="email" [(ngModel)]="email">
+  Password: <input type="password" name="password" [(ngModel)]="password">
+  Re-enter Password: <input type="password" name="password" [(ngModel)]="password2">
+  Birthday: <input type="number" name="birthday" [(ngModel)]="birthday">
+  Address: <input type="text" name="address" [(ngModel)]="address">
+  <button type="submit" (click)="signup()"></button>
+</form>
