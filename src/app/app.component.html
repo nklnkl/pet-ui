@@ -1,10 +1,24 @@
-<h1>Angular Router</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="/assets/logo.png" class="d-inline-block align-top" alt="">
+    Pet Adoption Center
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" routerLink="/pets" routerLinkActive="active">Pets</a>
+      <a class="nav-item nav-link" routerLink="/new-pet" routerLinkActive="active">Submit A Pet</a>
+      <a class="nav-item nav-link" routerLink="/account" routerLinkActive="active">Account</a>
+      <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+      <a class="nav-item nav-link" routerLink="/pet/:id" routerLinkActive="active">Pet</a>
+      <a class="nav-item nav-link" routerLink="/sign-up" routerLinkActive="active">Sign Up</a>
+    </div>
+  </div>
+</nav>
+
 <nav>
-  <a routerLink="/pets" routerLinkActive="active">Pets</a>
-  <a routerLink="/new-pet" routerLinkActive="active">Submit A Pet</a>
-  <a routerLink="/account" routerLinkActive="active">Account</a>
-  <a routerLink="/login" routerLinkActive="active">Login</a>
-  <a routerLink="/pet/:id" routerLinkActive="active">Pet</a>
-  <a routerLink="/sign-up" routerLinkActive="active">Sign Up</a>
+
 </nav>
 <router-outlet></router-outlet>
