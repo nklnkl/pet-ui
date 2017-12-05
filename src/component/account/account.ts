@@ -12,7 +12,7 @@ export class AccountComponent {
   private birthday: number;
   private address: string;
 
-  public update (email,  password,  name,  birthday,  address) : void {
-    // HttpService.update();
+  public update () : void {
+    // AccountHttp.update();
   }
 }
