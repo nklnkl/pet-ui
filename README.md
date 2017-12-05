@@ -1,3 +1,6 @@
+# Pet-Server URI
+http://45.55.65.220:10004
+
 # PetUi
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.2.
