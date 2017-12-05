@@ -1,9 +1,10 @@
+import { Component } from '@angular/core';
 @Component({
-  selector: 'account-component',
+  selector: 'account',
   templateUrl: 'account.html',
   styleUrls: ['account.css']
 })
-class AccountComponent {
+export class AccountComponent {
   private email: string;
   private password: string;
   private password2: string;

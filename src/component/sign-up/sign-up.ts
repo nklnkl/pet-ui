@@ -1,9 +1,10 @@
+import { Component } from '@angular/core';
 @Component({
-  selector: 'signup-component',
-  templateUrl: 'signup.html',
-  styleUrls: ['signup.css']
+  selector: 'sign-up',
+  templateUrl: 'sign-up.html',
+  styleUrls: ['sign-up.css']
 })
-class SignupComponent {
+export class SignUpComponent {
   private email: string;
   private password: string;
   private password2: string;
@@ -11,7 +12,7 @@ class SignupComponent {
   private birthday: number;
   private address: string;
 
-  public signup () : void {
+  public signUp () : void {
     // HttpService.registration(email, password, password2, name, birthday, address)
   }
 }
