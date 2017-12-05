@@ -5,12 +5,12 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
-import { AccountComponent } from '../component/account/account';
-import { LoginComponent } from '../component/login/login';
-import { PetComponent } from '../component/pet/pet';
-import { SignUpComponent } from '../component/sign-up/sign-up';
-import { NewPetComponent } from '../component/new-pet/new-pet';
-import { PetsComponent } from '../component/pets/pets';
+import { AccountComponent } from '../components/account/account';
+import { LoginComponent } from '../components/login/login';
+import { PetComponent } from '../components/pet/pet';
+import { SignUpComponent } from '../components/sign-up/sign-up';
+import { NewPetComponent } from '../components/new-pet/new-pet';
+import { PetsComponent } from '../components/pets/pets';
 
 const routes: Routes = [
   { path: 'account', component: AccountComponent },
