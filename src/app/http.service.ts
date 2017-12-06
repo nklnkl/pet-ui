@@ -74,6 +74,27 @@ export class HttpService {
       });
   }
 
+  public logout () {
+    localStorage.removeItem('sessionId');
+    localStorage.removeItem('userId');
+    this.session.next(false);
+    /* for now, there is no log out api, just delete local cache.
+    let url: string = 'http://45.55.65.220:10004/guest/session';
+    let body: any = {email: email, password: password};
+    let headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+    let options: any = { headers: headers, observe: 'response' };
+    return this.httpClient.post<SessionInterface>(url, body, options)
+      .map((response: HttpResponse<SessionInterface>) => {
+        if (response.status == 422) return 1;
+        if (response.status == 500) return 2;
+        localStorage.setItem('sessionId', response.body.id);
+        localStorage.setItem('userId', response.body.userId);
+        this.session.next(true);
+        return 0;
+      });
+    */
+  }
+
   /*
     observable codes:
       account: success

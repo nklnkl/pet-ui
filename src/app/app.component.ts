@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpService } from './http.service';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,14 @@ export class AppComponent {
 
   private session: boolean;
 
-  constructor (private http: HttpService) {
+  constructor (private http: HttpService, private router: Router) {
     this.http.session.subscribe((session: boolean) => {
       this.session = session;
     });
+  }
+
+  logout () {
+    this.http.logout();
+    this.router.navigate(['pets']);
   }
 }
