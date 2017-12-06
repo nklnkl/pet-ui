@@ -10,10 +10,8 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link active" routerLink="/pets" routerLinkActive="active">Pets</a>
       <a class="nav-item nav-link" routerLink="/new-pet" routerLinkActive="active">Submit A Pet</a>
-      <a class="nav-item nav-link" routerLink="/account" routerLinkActive="active">Account</a>
-      <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active">Login</a>
-      <a class="nav-item nav-link" routerLink="/pet/:id" routerLinkActive="active">Pet</a>
-      <a class="nav-item nav-link" routerLink="/sign-up" routerLinkActive="active">Sign Up</a>
+      <a class="nav-item nav-link" routerLink="/account" routerLinkActive="active" *ngIf="session">Account</a>
+      <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active" *ngIf="!session">Login</a>
     </div>
   </div>
 </nav>

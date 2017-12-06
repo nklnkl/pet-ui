@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpService } from './http.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  private session: boolean;
+
+  constructor (private http: HttpService) {
+    this.http.session.subscribe((session: boolean) => {
+      this.session = session;
+    });
+  }
 }
