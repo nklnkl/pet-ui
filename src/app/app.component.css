@@ -1,3 +1,18 @@
 img {
   width: 60px;
 }
+.navbar-nav > .nav-item {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-right: 4px;
+  background-color: white;
+  color: black;
+  font-size: 12pt;
+}
+.navbar-nav > .nav-item:hover {
+  text-decoration: none;
+  background-color: black;
+  color: white;
+}
