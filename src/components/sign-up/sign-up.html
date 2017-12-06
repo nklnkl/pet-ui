@@ -6,6 +6,7 @@
 </section>
 
 <form class="container" *ngIf="!signedUp">
+  <h2>Sign Up</h2>
   <div class="form-group">
     <label for="email">Email</label>
     <input type="email" class="form-control" name="email" [(ngModel)]="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -19,5 +20,5 @@
     <label for="password2">Re-enter Password</label>
     <input type="password" class="form-control" name="password2" [(ngModel)]="password2" id="password2" placeholder="Confirm password">
   </div>
-  <button type="submit" class="btn btn-primary" (click)="signUp()">Submit</button>
+  <button type="submit" class="btn btn-primary" (click)="signUp()">Sign Up</button>
 </form>
