@@ -1,0 +1,22 @@
+<button type="submit" class="btn btn-primary" (click)="refresh()">Refresh</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Birth Date</th>
+      <th>Breed</th>
+      <th>Species</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pet of pets; let i = index">
+      <td>{{pet.getName()}}</td>
+      <td>{{pet.getBirthDateString()}}</td>
+      <td>{{pet.getBreedString()}}</td>
+      <td>{{pet.getSpeciesString()}}</td>
+      <td>{{pet.getStatusString()}}</td>
+    </tr>
+  </tbody>
+</table>

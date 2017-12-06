@@ -92,7 +92,6 @@ export class HttpService {
       .map((response: HttpResponse<AccountInterface>) => {
         if (response.status == 422) return 1;
         if (response.status == 500) return 2;
-        this.session.next(true);
         return new Account(response.body);
       });
   }
@@ -115,8 +114,29 @@ export class HttpService {
       .map((response: HttpResponse<AccountInterface>) => {
         if (response.status == 422) return 1;
         if (response.status == 500) return 2;
-        this.session.next(true);
         return 0;
+      });
+  }
+
+  /*
+    observable codes:
+      Array<Pet>: success
+      2: server error.
+  */
+  public getPets () : Observable<Array<Pet>|number> {
+    let url: string = 'http://45.55.65.220:10004/guest/pet';
+    let headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    let options: any = { headers: headers, observe: 'response' };
+    return this.httpClient.get<Array<PetInterface>>(url, options)
+      .map((response: HttpResponse<Array<PetInterface>>) => {
+        if (response.status == 500) return 2;
+        let pets: Array<Pet> = [];
+        response.body.forEach((pet: PetInterface) => {
+          pets.push(new Pet(pet));
+        });
+        return pets;
       });
   }
 
