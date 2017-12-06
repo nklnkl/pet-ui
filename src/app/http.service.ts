@@ -8,7 +8,9 @@ import {
   Account,
   AccountInterface,
   Session,
-  SessionInterface
+  SessionInterface,
+  Pet,
+  PetInterface
 } from 'pet-entity';
 
 @Injectable()
@@ -32,7 +34,8 @@ export class HttpService {
   }
 
   /*
-    observable error codes:
+    observable codes:
+      0: success
       1: invalid email/password,
       2: server error.
   */
@@ -50,7 +53,8 @@ export class HttpService {
   }
 
   /*
-    observable error codes:
+    observable codes:
+      0: success
       1: invalid email/password,
       2: server error.
   */
@@ -71,7 +75,8 @@ export class HttpService {
   }
 
   /*
-    observable error codes:
+    observable codes:
+      account: success
       1: user id not provided, client error, not user error
       2: server error.
   */
@@ -93,11 +98,12 @@ export class HttpService {
   }
 
   /*
-    observable error codes:
+    observable codes:
+      0: success
       1: user id not provided, client error, not user error
       2: server error.
   */
-  public updateAccount (update: AccountInterface) : Observable<Account|number> {
+  public updateAccount (update: AccountInterface) : Observable<number> {
     let url: string = 'http://45.55.65.220:10004/customer/account';
     let headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -110,7 +116,29 @@ export class HttpService {
         if (response.status == 422) return 1;
         if (response.status == 500) return 2;
         this.session.next(true);
-        return new Account(response.body);
+        return 0;
+      });
+  }
+
+  /*
+    observable codes:
+      0: success
+      1: missing fields
+      2: server error.
+  */
+  public submitPet (pet: PetInterface) : Observable<number> {
+    let url: string = 'http://45.55.65.220:10004/customer/pet';
+    let headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'user-id': localStorage.getItem('userId'),
+      'session-id': localStorage.getItem('sessionId')
+    });
+    let options: any = { headers: headers, observe: 'response' };
+    return this.httpClient.post<PetInterface>(url, pet, options)
+      .map((response: HttpResponse<PetInterface>) => {
+        if (response.status == 422) return 1;
+        if (response.status == 500) return 2;
+        return 0;
       });
   }
 }
