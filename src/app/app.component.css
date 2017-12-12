@@ -1,6 +1,9 @@
 img {
   width: 60px;
 }
+.navbar-nav {
+  margin-top: 15px;
+}
 .navbar-nav > .nav-item {
   padding-left: 5px;
   padding-right: 5px;

@@ -33,6 +33,7 @@ export class SignUpComponent {
     }
     this.service.signUp(this.email, this.password)
       .subscribe((result: number) => {
+        console.log(result);
         if (result == 1 ) {
           this.error = true;
           this.errorTitle = 'Error!';
@@ -45,7 +46,7 @@ export class SignUpComponent {
           this.errorMessage = 'We have encountered a server error, please try again later.';
           return;
         }
-        this.router.navigate(['login', { signedUp: 'true'}]);
+        this.router.navigate(['login']);
         return;
       });
   }

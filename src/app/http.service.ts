@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
+import 'rxjs/add/operator/catch';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import {
@@ -25,7 +26,7 @@ export class HttpService {
 
   private checkSession () : void {
     let s: string = localStorage.getItem('sessionId')
-    let u: string = localStorage.getItem('userId')
+    let u: string = localStorage.getItem('accountId')
     if ( s && u ) {
       this.session.next(true);
     }
@@ -65,10 +66,10 @@ export class HttpService {
     let options: any = { headers: headers, observe: 'response' };
     return this.httpClient.post<SessionInterface>(url, body, options)
       .map((response: HttpResponse<SessionInterface>) => {
-        if (response.status == 422) return 1;
+        if (response.status == 422 || 401) return 1;
         if (response.status == 500) return 2;
         localStorage.setItem('sessionId', response.body.id);
-        localStorage.setItem('userId', response.body.userId);
+        localStorage.setItem('accountId', response.body.accountId);
         this.session.next(true);
         return 0;
       });
@@ -76,7 +77,7 @@ export class HttpService {
 
   public logout () {
     localStorage.removeItem('sessionId');
-    localStorage.removeItem('userId');
+    localStorage.removeItem('accountId');
     this.session.next(false);
     /* for now, there is no log out api, just delete local cache.
     let url: string = 'http://45.55.65.220:10004/guest/session';
@@ -88,7 +89,7 @@ export class HttpService {
         if (response.status == 422) return 1;
         if (response.status == 500) return 2;
         localStorage.setItem('sessionId', response.body.id);
-        localStorage.setItem('userId', response.body.userId);
+        localStorage.setItem('accountId', response.body.accountId);
         this.session.next(true);
         return 0;
       });
@@ -100,12 +101,13 @@ export class HttpService {
       account: success
       1: user id not provided, client error, not user error
       2: server error.
+      3: account not found
   */
   public getAccount () : Observable<Account|number> {
     let url: string = 'http://45.55.65.220:10004/customer/account';
     let headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'user-id': localStorage.getItem('userId'),
+      'user-id': localStorage.getItem('accountId'),
       'session-id': localStorage.getItem('sessionId')
     });
     let options: any = { headers: headers, observe: 'response' };
@@ -113,6 +115,7 @@ export class HttpService {
       .map((response: HttpResponse<AccountInterface>) => {
         if (response.status == 422) return 1;
         if (response.status == 500) return 2;
+        if (response.status == 404) return 3;
         return new Account(response.body);
       });
   }
@@ -127,7 +130,7 @@ export class HttpService {
     let url: string = 'http://45.55.65.220:10004/customer/account';
     let headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'user-id': localStorage.getItem('userId'),
+      'user-id': localStorage.getItem('accountId'),
       'session-id': localStorage.getItem('sessionId')
     });
     let options: any = { headers: headers, observe: 'response' };
@@ -144,7 +147,7 @@ export class HttpService {
       Array<Pet>: success
       2: server error.
   */
-  public getPets () : Observable<Array<Pet>|number> {
+  public getPets (species?: number, breed?: number) : Observable<Array<Pet>|number> {
     let url: string = 'http://45.55.65.220:10004/guest/pet';
     let headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json'
@@ -171,7 +174,7 @@ export class HttpService {
     let url: string = 'http://45.55.65.220:10004/customer/pet';
     let headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'user-id': localStorage.getItem('userId'),
+      'user-id': localStorage.getItem('accountId'),
       'session-id': localStorage.getItem('sessionId')
     });
     let options: any = { headers: headers, observe: 'response' };

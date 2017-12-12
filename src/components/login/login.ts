@@ -9,28 +9,24 @@ import { HttpService } from '../../app/http.service';
 export class LoginComponent implements OnInit {
   private email: string;
   private password: string;
-  private signedUp: boolean;
   private error: boolean;
   private errorTitle: string;
   private errorMessage: string;
 
   constructor (private route: ActivatedRoute, private service: HttpService,
    private router: Router) {
-    this.signedUp = false;
     this.error = false;
   }
 
   ngOnInit () {
-    this.route.params.subscribe((params: Params) => {
-      this.signedUp = params.signedUp;
-    });
   }
 
   public login() : void {
-    if (!this.email || !this.password) {
+    console.log(this.email, this.password);
+    if (this.email == '' || this.password == '') {
       this.error = true;
       this.errorTitle = 'Error!';
-      this.errorMessage = 'Please enter your email, password, and confirm your password.';
+      this.errorMessage = 'Please enter your email and password.';
       return;
     }
     this.service.login(this.email, this.password)
