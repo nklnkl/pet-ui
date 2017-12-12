@@ -66,8 +66,6 @@ export class HttpService {
     let options: any = { headers: headers, observe: 'response' };
     return this.httpClient.post<SessionInterface>(url, body, options)
       .map((response: HttpResponse<SessionInterface>) => {
-        if (response.status == 422 || 401) return 1;
-        if (response.status == 500) return 2;
         localStorage.setItem('sessionId', response.body.id);
         localStorage.setItem('accountId', response.body.accountId);
         this.session.next(true);
@@ -107,7 +105,7 @@ export class HttpService {
     let url: string = 'http://45.55.65.220:10004/customer/account';
     let headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'user-id': localStorage.getItem('accountId'),
+      'account-id': localStorage.getItem('accountId'),
       'session-id': localStorage.getItem('sessionId')
     });
     let options: any = { headers: headers, observe: 'response' };
@@ -130,7 +128,7 @@ export class HttpService {
     let url: string = 'http://45.55.65.220:10004/customer/account';
     let headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'user-id': localStorage.getItem('accountId'),
+      'account-id': localStorage.getItem('accountId'),
       'session-id': localStorage.getItem('sessionId')
     });
     let options: any = { headers: headers, observe: 'response' };
@@ -174,14 +172,12 @@ export class HttpService {
     let url: string = 'http://45.55.65.220:10004/customer/pet';
     let headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      'user-id': localStorage.getItem('accountId'),
+      'account-id': localStorage.getItem('accountId'),
       'session-id': localStorage.getItem('sessionId')
     });
     let options: any = { headers: headers, observe: 'response' };
     return this.httpClient.post<PetInterface>(url, pet, options)
       .map((response: HttpResponse<PetInterface>) => {
-        if (response.status == 422) return 1;
-        if (response.status == 500) return 2;
         return 0;
       });
   }

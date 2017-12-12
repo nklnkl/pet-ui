@@ -30,21 +30,17 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.service.login(this.email, this.password)
-    .subscribe((result: number) => {
-      if (result == 1 ) {
+    .subscribe(
+      (result: number) => {
+      this.router.navigate(['pets']);
+      return;
+      },
+      (err) => {
         this.error = true;
         this.errorTitle = 'Error!';
         this.errorMessage = 'Please enter your email, password, and confirm your password.';
         return;
       }
-      if (result == 2 ) {
-        this.error = true;
-        this.errorTitle = 'Error!';
-        this.errorMessage = 'We have encountered a server error, please try again later.';
-        return;
-      }
-      this.router.navigate(['pets']);
-      return;
-    });
+    );
   }
 }

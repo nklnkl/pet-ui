@@ -44,22 +44,14 @@ export class NewPetComponent {
     };
     this.http.submitPet(pet)
       .subscribe((result: number) => {
-        if (result == 1) {
-          this.error = true;
-          this.errorTitle = 'Error!';
-          this.errorMessage = 'Please make sure to fill in all the fields.';
-          return;
-        }
-        else if (result == 2) {
-          this.error = true;
-          this.errorTitle = 'Error!';
-          this.errorMessage = 'We have encountered a server error, please try again later.';
-          return;
-        }
-        else {
-          this.router.navigate(['pets']);
-          return;
-        }
+        this.router.navigate(['pets']);
+        return;
+      },
+      (err) => {
+        this.error = true;
+        this.errorTitle = 'Error!';
+        this.errorMessage = 'We have encountered a server error, please try again later.';
+        return;
       });
   }
 }
